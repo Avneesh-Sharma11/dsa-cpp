@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int minElement(vector<int>& nums) {
+
+        int sum = INT_MAX;
+        for (int num : nums) {
+            int s = 0;
+
+            while (num > 0) {
+                s += num % 10;
+                num /= 10;
+            }
+            sum = min(s, sum);
+        }
+        return sum;
+    }
+};
