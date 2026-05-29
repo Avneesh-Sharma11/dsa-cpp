@@ -1,0 +1,59 @@
+class Solution {
+public:
+    int countKthRoots(int l, int r, int k) {
+        if (k == 1)
+            return r - l + 1;
+        if (l == 0 && r == 0)
+            return 1;
+
+        int cnt = 0;
+        for (int i = 0; i < r; i++) {
+            int num = pow(i, k);
+
+            if (num >= l && num <= r) {
+                cnt++;
+            }
+            if (num > r)
+                return cnt;
+        }
+        return cnt;
+    }
+};
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+class Solution {
+public:
+    bool power(long base, int k, int limit) {
+
+        long res = 1;
+        for (int i = 0; i < k; i++) {
+            res *= base;
+            if (res > limit)
+                return false;
+        }
+        return true;
+    }
+    int count(int n, int k) {
+        if (n < 0)
+            return 0;
+        int s = 0, e = n;
+        int ans = 0;
+        while (s <= e) {
+            int mid = s + (e - s) / 2;
+
+            if (power(mid, k, n)) {
+                ans = mid;
+                s = mid + 1;
+            } else {
+                e = mid - 1;
+            }
+        }
+        return ans + 1; // include Zero
+    }
+    int countKthRoots(int l, int r, int k) {
+        return count(r, k) - count(l - 1, k);
+    }
+};
