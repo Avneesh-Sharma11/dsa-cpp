@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int countWave(int num) {
+        string s = to_string(num);
+        int i = 2;
+        int w = 0;
+        while (i < s.length()) {
+            int a = s[i - 2] - '0';
+            int b = s[i - 1] - '0';
+            int c = s[i] - '0';
+            if (b > a && b > c) {
+                w++;
+            } else if (b < a && b < c) {
+                w++;
+            }
+            i++;
+        }
+        return w;
+    }
+    int totalWaviness(int num1, int num2) {
+        int wave = 0;
+        for (int i = num1; i <= num2; i++) {
+            wave += countWave(i);
+        }
+        return wave;
+    }
+};
